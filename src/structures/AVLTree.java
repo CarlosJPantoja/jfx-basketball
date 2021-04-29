@@ -51,7 +51,7 @@ public class AVLTree<T extends Number, U> {
 			if(subAr.getRight()==null){
 				subAr.setRight(nuevo);;
 			}else{
-				subAr.setLeft(insertarAVL(nuevo, subAr.getRight()));
+				subAr.setRight(insertarAVL(nuevo, subAr.getRight()));
 				if((obtainB(subAr.getRight())-obtainB(subAr.getLeft())==2)){
 					if(nuevo.compareTo(subAr.getRight().getStatistic())>0){
 						nuevoPadre=rotacionDerecha(subAr);
@@ -75,15 +75,15 @@ public class AVLTree<T extends Number, U> {
 
 	private AVLNode<T, U> rotacionDobleDerecha(AVLNode<T, U> subAr) {
 		AVLNode<T, U> temporal;
-		subAr.setLeft(rotacionDerecha(subAr.getLeft()));
-		temporal=rotacionIzquierda(subAr);
+		subAr.setRight(rotacionIzquierda(subAr.getRight()));
+		temporal=rotacionDerecha(subAr);
 		return temporal;
 	}
 
 	private AVLNode<T, U> rotacionDobleIzquierda(AVLNode<T, U> subAr) {
 		AVLNode<T, U> temporal;
-		subAr.setRight(rotacionIzquierda(subAr.getRight()));
-		temporal=rotacionDerecha(subAr);
+		subAr.setLeft(rotacionDerecha(subAr.getLeft()));
+		temporal=rotacionIzquierda(subAr);
 		return temporal;
 	}
 
