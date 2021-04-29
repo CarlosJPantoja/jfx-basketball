@@ -55,8 +55,8 @@ public class AVLNode<T, U> implements Comparable<T>{
 
 	@Override
 	public int compareTo(T o) {
-		double x = (double)o;
-		double y = (double)statistic;
+		Double x = Double.parseDouble(o+"");
+		Double y = Double.parseDouble(statistic+"");
 		if(y>x) {
 			return 1;
 		} else if(x>y) {
