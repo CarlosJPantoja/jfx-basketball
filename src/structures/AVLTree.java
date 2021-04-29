@@ -10,4 +10,6 @@ public class AVLTree<T extends Number, U> {
 	public AVLNode<T, U> getRoot(){
 		return root;
 	}
+	
+	
 }
