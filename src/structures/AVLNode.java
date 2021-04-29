@@ -2,7 +2,7 @@ package structures;
 
 import java.util.ArrayList;
 
-public class AVLNode<T, U> {
+public class AVLNode<T, U> implements Comparable<T>{
 	
     private AVLNode<T, U> left, right;
     private T statistic;
@@ -51,5 +51,18 @@ public class AVLNode<T, U> {
 
 	public T getStatistic() {
 		return statistic;
+	}
+
+	@Override
+	public int compareTo(T o) {
+		double x = (double)o;
+		double y = (double)statistic;
+		if(y>x) {
+			return 1;
+		} else if(x>y) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 }
