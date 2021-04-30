@@ -9,12 +9,13 @@ public class AVLNode<T, U> implements Comparable<T>{
     private ArrayList<U> players;
     private int balance;
 
-    public AVLNode(T stat) {
+    public AVLNode(T stat, U aux) {
         statistic = stat;
         balance = 0;
         left = null;
         right = null;
-        setPlayers(new ArrayList<>());
+        players = new ArrayList<>();
+        players.add(aux);
     }
 
 	public AVLNode<T, U> getLeft() {
@@ -47,6 +48,10 @@ public class AVLNode<T, U> implements Comparable<T>{
 
 	public void setPlayers(ArrayList<U> p) {
 		players = p;
+	}
+	
+	public void addPlayer(U p) {
+		players.add(p);
 	}
 
 	public T getStatistic() {

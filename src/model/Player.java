@@ -86,5 +86,7 @@ public class Player {
 		this.stl = stl;
 	}
 	
-	
+	public String toString() {
+		return name;
+	}
 }

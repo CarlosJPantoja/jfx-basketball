@@ -61,7 +61,7 @@ public class AVLTree<T extends Number, U> {
 				}
 			}
 		}else{
-			// JOptionPane.showMessageDialog(null, "Nodo duplicado");
+			subAr.addPlayer(nuevo.getPlayers().get(0));
 		}
 		if((subAr.getLeft()==null)&&(subAr.getRight()!=null)){
 			subAr.setBf(subAr.getRight().getBf()+1);
@@ -105,8 +105,8 @@ public class AVLTree<T extends Number, U> {
 		return auxiliar;
 	}
 
-	public void insertar(T d){
-		AVLNode<T, U> nuevo = new AVLNode<T, U>(d);
+	public void insertar(T d, U aux){
+		AVLNode<T, U> nuevo = new AVLNode<T, U>(d, aux);
 		if(root==null){
 			root=nuevo;
 		}else{
@@ -116,9 +116,20 @@ public class AVLTree<T extends Number, U> {
 	
 	public void preorden(AVLNode<T, U> r){
         if(r!=null){
-            System.out.println(r.getStatistic());
+            System.out.println
+            (r.getStatistic());
             preorden(r.getLeft());
             preorden(r.getRight());
+        }
+    }
+	
+	public void inOrden(AVLNode<T, U> r){
+        if(r!=null){
+            inOrden(r.getLeft());
+            for(int i=0; i<r.getPlayers().size(); i++) {
+                System.out.println(r.getPlayers().get(i).toString());
+            }
+            inOrden(r.getRight());
         }
     }
 }

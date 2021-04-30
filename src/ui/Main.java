@@ -1,19 +1,17 @@
 package ui;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
+import model.Player;
 import structures.AVLTree;
 
 public class Main {
 
 	private static final String FILEIN = "data/data.csv";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Main m = new Main();
 		m.menu();
 	}
@@ -47,20 +45,35 @@ public class Main {
 		*/
 		long time = System.currentTimeMillis();
 		BufferedReader br = new BufferedReader(new FileReader(FILEIN));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		AVLTree<Double, String> tree = new AVLTree<>();
+		AVLTree<Double, Player> tsTree = new AVLTree<>();
+		AVLTree<Double, Player> ftrTree = new AVLTree<>();
+		AVLTree<Double, Player> trbTree = new AVLTree<>();
+		AVLTree<Double, Player> astTree = new AVLTree<>();
+		AVLTree<Double, Player> stlTree = new AVLTree<>();
 		br.readLine();
-		long length = 1;
-		while(1<length) {
-			String[] line = br.readLine().split(";");
-			Double ts = Double.parseDouble(line[3]);
-			
+		try {
+			while(true) {
+				String[] line = br.readLine().split(";");
+				String name = line[0];
+				Integer age = Integer.parseInt(line[1]);
+				String team = line[2];
+				Double ts = Double.parseDouble(line[3]);
+				Double ftr = Double.parseDouble(line[4]);
+				Double trb = Double.parseDouble(line[5]);
+				Double ast = Double.parseDouble(line[6]);
+				Double stl = Double.parseDouble(line[7]);
+				Player aux = new Player(name, age, team, ts, ftr, trb, ast, stl);
+				tsTree.insertar(ts, aux);
+				ftrTree.insertar(ftr, aux);
+				trbTree.insertar(trb, aux);
+				astTree.insertar(ast, aux);
+				stlTree.insertar(stl, aux);
+			}
+		} catch(Exception e) {
 			
 		}
+		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		
-		bw.write((System.currentTimeMillis()-time)+"\n");
-		bw.close();
 		br.close();
 	}
-
 }
