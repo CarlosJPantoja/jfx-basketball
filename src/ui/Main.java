@@ -17,32 +17,33 @@ public class Main {
 	}
 
 	private void menu() throws IOException {
-		/*AVLTree<Integer, String> tree = new AVLTree<>();
-		tree.insertar(10);
+		AVLTree<Integer, String> tree = new AVLTree<>();
+		tree.insertar(10, "");
 		System.out.println(tree.getRoot().getStatistic()+"\n");
-		tree.insertar(5);
+		tree.insertar(5, "");
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+"\n");
-		tree.insertar(13);
+		tree.insertar(13, "");
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic()+"\n");
-		tree.insertar(1);
+		tree.insertar(1, "");
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+"\n");
-		tree.insertar(6); 
+		tree.insertar(6, ""); 
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+"\n");
-		tree.insertar(17);
+		tree.insertar(17, "");
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+" null "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
-		tree.insertar(16);
+		tree.insertar(16, "");
 		System.out.println(tree.getRoot().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+" "+tree.getRoot().getRight().getLeft().getStatistic()+" "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
-		*/
+		tree.insertar(16, "");
+		/*
 		long time = System.currentTimeMillis();
 		BufferedReader br = new BufferedReader(new FileReader(FILEIN));
 		AVLTree<Double, Player> tsTree = new AVLTree<>();
@@ -73,10 +74,11 @@ public class Main {
 			
 		}
 		
-		ftrTree.inOrden(ftrTree.search(3.0, ftrTree.getRoot()).getFather());
+		ftrTree.inOrden(ftrTree.search(3.0, ftrTree.getRoot()));
 		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		
 		br.close();
+		*/
 	}
 	
 	
