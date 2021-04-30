@@ -72,8 +72,12 @@ public class Main {
 		} catch(Exception e) {
 			
 		}
+		
+		ftrTree.inOrden(ftrTree.search(3.0, ftrTree.getRoot()).getFather());
 		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		
 		br.close();
 	}
+	
+	
 }

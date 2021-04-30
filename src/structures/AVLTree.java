@@ -37,6 +37,7 @@ public class AVLTree<T extends Number, U> {
 		if(nuevo.compareTo(subAr.getStatistic())<0){
 			if(subAr.getLeft()==null){
 				subAr.setLeft(nuevo);
+				nuevo.setFather(subAr);
 			}else{
 				subAr.setLeft(insertarAVL(nuevo, subAr.getLeft()));
 				if((obtainB(subAr.getLeft())-obtainB(subAr.getRight())==2)){
@@ -49,7 +50,8 @@ public class AVLTree<T extends Number, U> {
 			}
 		}else if(nuevo.compareTo(subAr.getStatistic())>0){
 			if(subAr.getRight()==null){
-				subAr.setRight(nuevo);;
+				subAr.setRight(nuevo);
+				nuevo.setFather(subAr);
 			}else{
 				subAr.setRight(insertarAVL(nuevo, subAr.getRight()));
 				if((obtainB(subAr.getRight())-obtainB(subAr.getLeft())==2)){
@@ -90,7 +92,9 @@ public class AVLTree<T extends Number, U> {
 	private AVLNode<T, U> rotacionIzquierda(AVLNode<T, U> subAr) {
 		AVLNode<T, U> auxiliar=subAr.getLeft();
 		subAr.setLeft(auxiliar.getRight());
-		auxiliar.setRight(subAr);;
+		auxiliar.getRight().setFather(subAr);
+		auxiliar.setRight(subAr);
+		subAr.setFather(auxiliar);
 		subAr.setBf(Math.max(obtainB(subAr.getLeft()), obtainB(subAr.getRight()))+1);  //obtiene el maximo
 		auxiliar.setBf(Math.max(obtainB(auxiliar.getLeft()), obtainB(auxiliar.getRight()))+1);
 		return auxiliar;
@@ -99,7 +103,9 @@ public class AVLTree<T extends Number, U> {
 	private AVLNode<T, U> rotacionDerecha(AVLNode<T, U> subAr) {
 		AVLNode<T, U> auxiliar=subAr.getRight();
 		subAr.setRight(auxiliar.getLeft());
-		auxiliar.setLeft(subAr);;
+		auxiliar.getLeft().setFather(subAr);
+		auxiliar.setLeft(subAr);
+		subAr.setFather(auxiliar);
 		subAr.setBf(Math.max(obtainB(subAr.getLeft()), obtainB(subAr.getRight()))+1);  //obtiene el maximo
 		auxiliar.setBf(Math.max(obtainB(auxiliar.getLeft()), obtainB(auxiliar.getRight()))+1);
 		return auxiliar;
@@ -127,7 +133,7 @@ public class AVLTree<T extends Number, U> {
         if(r!=null){
             inOrden(r.getLeft());
             for(int i=0; i<r.getPlayers().size(); i++) {
-                System.out.println(r.getPlayers().get(i).toString());
+            	System.out.println(r.getPlayers().get(i).toString());
             }
             inOrden(r.getRight());
         }
