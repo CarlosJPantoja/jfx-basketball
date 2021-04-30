@@ -8,6 +8,7 @@ public class AVLNode<T, U> implements Comparable<T>{
     private T statistic;
     private ArrayList<U> players;
     private int balance;
+    private int h;
 
     public AVLNode(T stat, U aux) {
         statistic = stat;
@@ -16,6 +17,27 @@ public class AVLNode<T, U> implements Comparable<T>{
         right = null;
         players = new ArrayList<>();
         players.add(aux);
+    }
+    
+    public int high() {
+    	return high(this);
+    }
+    
+    private int high(AVLNode<T, U> current) {
+    	if(current == null) {
+    		return -1;
+    	}else if(current.getLeft()==null && current.getRight()==null) {
+    		current.setH(0);
+    		current.setBf(0);
+    		return 0;
+    	} else {
+    		int left = high(current.getLeft());
+    		int right = high(current.getRight());
+    		int temp = Math.max(left, right)+1;
+    		current.setH(temp);
+    		current.setBf(right-left);
+    		return temp;
+    	}
     }
 
 	public AVLNode<T, U> getLeft() {
@@ -69,5 +91,13 @@ public class AVLNode<T, U> implements Comparable<T>{
 		} else {
 			return 0;
 		}
+	}
+
+	public int getH() {
+		return h;
+	}
+
+	public void setH(int h) {
+		this.h = h;
 	}
 }

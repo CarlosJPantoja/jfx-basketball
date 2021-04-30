@@ -17,32 +17,103 @@ public class Main {
 	}
 
 	private void menu() throws IOException {
+		
 		AVLTree<Integer, String> tree = new AVLTree<>();
-		tree.insertar(10, "");
-		System.out.println(tree.getRoot().getStatistic()+"\n");
+		
+		
+		tree.insertar(6, "");
+		System.out.println("   "+tree.getRoot().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
 		tree.insertar(5, "");
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+"\n");
-		tree.insertar(13, "");
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic()+"\n");
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
 		tree.insertar(1, "");
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+"\n");
-		tree.insertar(6, ""); 
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"   "+ tree.getRoot().getRight().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"   "+ tree.getRoot().getRight().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
+		tree.insertar(10, "");
+		
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"   "+ tree.getRoot().getRight().getStatistic());
+		System.out.println("      "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"   "+ tree.getRoot().getRight().getH());
+		//System.out.println("      "+tree.getRoot().getRight().getRight().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf());
+		System.out.println("      "+tree.getRoot().getRight().getRight().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
+		tree.insertar(13, "");
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"   "+ tree.getRoot().getRight().getStatistic());
+		System.out.println("    "+tree.getRoot().getRight().getLeft().getStatistic()+" "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"   "+ tree.getRoot().getRight().getH());
+		//System.out.println("    "+tree.getRoot().getRight().getLeft().getH()+" "+tree.getRoot().getRight().getRight().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf());
+		System.out.println("    "+tree.getRoot().getRight().getLeft().getBf()+" "+tree.getRoot().getRight().getRight().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
 		tree.insertar(17, "");
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+" null "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"   "+ tree.getRoot().getRight().getStatistic());
+		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+"   "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"   "+ tree.getRoot().getRight().getH());
+		//System.out.println(tree.getRoot().getLeft().getLeft().getH()+" "+tree.getRoot().getLeft().getRight().getH()+"   "+tree.getRoot().getRight().getRight().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf());
+		System.out.println(tree.getRoot().getLeft().getLeft().getBf()+" "+tree.getRoot().getLeft().getRight().getBf()+"   "+tree.getRoot().getRight().getRight().getBf()+"\n");
+		
+		
+		System.out.println("-------------\n");
 		tree.insertar(16, "");
-		System.out.println(tree.getRoot().getStatistic());
-		System.out.println(tree.getRoot().getLeft().getStatistic()+" "+ tree.getRoot().getRight().getStatistic());
+		System.out.println("   "+tree.getRoot().getStatistic());
+		System.out.println(" "+tree.getRoot().getLeft().getStatistic()+"   "+ tree.getRoot().getRight().getStatistic());
 		System.out.println(tree.getRoot().getLeft().getLeft().getStatistic()+" "+tree.getRoot().getLeft().getRight().getStatistic()+" "+tree.getRoot().getRight().getLeft().getStatistic()+" "+tree.getRoot().getRight().getRight().getStatistic()+"\n");
-		tree.insertar(16, "");
+		
+		//System.out.println("   "+tree.getRoot().getH());
+		//System.out.println(" "+tree.getRoot().getLeft().getH()+"   "+ tree.getRoot().getRight().getH());
+		//System.out.println(tree.getRoot().getLeft().getLeft().getH()+" "+tree.getRoot().getLeft().getRight().getH()+" "+tree.getRoot().getRight().getLeft().getH()+" "+tree.getRoot().getRight().getRight().getH()+"\n");
+		
+		System.out.println("   "+tree.getRoot().getBf());
+		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf());
+		System.out.println(tree.getRoot().getLeft().getLeft().getBf()+" "+tree.getRoot().getLeft().getRight().getBf()+" "+tree.getRoot().getRight().getLeft().getBf()+" "+tree.getRoot().getRight().getRight().getBf()+"\n");
+		
 		/*
 		long time = System.currentTimeMillis();
 		BufferedReader br = new BufferedReader(new FileReader(FILEIN));
@@ -74,7 +145,6 @@ public class Main {
 			
 		}
 		
-		ftrTree.inOrden(ftrTree.search(3.0, ftrTree.getRoot()));
 		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		
 		br.close();
