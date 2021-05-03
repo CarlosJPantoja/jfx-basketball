@@ -3,6 +3,7 @@ package ui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import model.Player;
 import structures.AVLTree;
@@ -17,6 +18,8 @@ public class Main {
 	}
 
 	private void menu() throws IOException {
+		
+		/*
 		
 		AVLTree<Integer, String> tree = new AVLTree<>();
 		
@@ -114,7 +117,21 @@ public class Main {
 		System.out.println(" "+tree.getRoot().getLeft().getBf()+"   "+ tree.getRoot().getRight().getBf());
 		System.out.println(tree.getRoot().getLeft().getLeft().getBf()+" "+tree.getRoot().getLeft().getRight().getBf()+" "+tree.getRoot().getRight().getLeft().getBf()+" "+tree.getRoot().getRight().getRight().getBf()+"\n");
 		
-		/*
+		
+		if(tree.getRoot().getFather()==null)
+			System.out.println("   null");
+		System.out.println(" "+tree.getRoot().getLeft().getFather().getStatistic()+"   "+ tree.getRoot().getRight().getFather().getStatistic());
+		System.out.println(tree.getRoot().getLeft().getLeft().getFather().getStatistic()+" "+tree.getRoot().getLeft().getRight().getFather().getStatistic()+" "+tree.getRoot().getRight().getLeft().getFather().getStatistic()+" "+tree.getRoot().getRight().getRight().getFather().getStatistic());
+		
+		
+		System.out.println("\nSeparado\n");
+		ArrayList<Integer> output = new ArrayList<Integer>();
+		output = tree.filter(tree.getRoot(), 17, output, -1, false);
+		for(int i=0; i<output.size(); i++) {
+			System.out.print(output.get(i)+" ");
+		}
+		
+		*/
 		long time = System.currentTimeMillis();
 		BufferedReader br = new BufferedReader(new FileReader(FILEIN));
 		AVLTree<Double, Player> tsTree = new AVLTree<>();
@@ -145,10 +162,16 @@ public class Main {
 			
 		}
 		
+		System.out.println("\nSeparado\n");
+		ArrayList<Player> output = new ArrayList<Player>();
+		output = tsTree.filter(tsTree.getRoot(), 0.0, output, 1, true);
+		for(int i=0; i<output.size(); i++) {
+			System.out.println(output.get(i));
+		}
+		
 		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		
 		br.close();
-		*/
 	}
 	
 	

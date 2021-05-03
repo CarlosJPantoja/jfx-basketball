@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class AVLNode<T, U> implements Comparable<T>{
 	
-    private AVLNode<T, U> left, right;
+    private AVLNode<T, U> left, right, father;
     private T statistic;
     private ArrayList<U> players;
     private int balance;
@@ -99,5 +99,13 @@ public class AVLNode<T, U> implements Comparable<T>{
 
 	public void setH(int h) {
 		this.h = h;
+	}
+
+	public AVLNode<T, U> getFather() {
+		return father;
+	}
+
+	public void setFather(AVLNode<T, U> father) {
+		this.father = father;
 	}
 }
