@@ -16,13 +16,13 @@ public class AVLTree<T extends Number, U> {
 	
 	public ArrayList<U> filter(AVLNode<T, U> current, T data, ArrayList<U> output, int rest, boolean incl){
 		if(current != null) {
-			output = filter(current.getLeft(), data, output, rest, incl);
+			output = filter(current.getRight(), data, output, rest, incl);
 			if(current.compareTo(data)==rest || (current.compareTo(data)==0 && incl)) {
 				for(int i=0; i<current.getPlayers().size(); i++) {
 					output.add(current.getPlayers().get(i));
 				}
 			}
-			output = filter(current.getRight(), data, output, rest, incl);
+			output = filter(current.getLeft(), data, output, rest, incl);
 		}
 		return output;
 	}

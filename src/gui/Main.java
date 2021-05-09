@@ -162,12 +162,12 @@ public class Main {
 			
 		}
 		
-		//System.out.println("\nSeparado\n");
-		//ArrayList<Player> output = new ArrayList<Player>();
-		//output = tsTree.filter(tsTree.getRoot(), 0.0, output, 1, true);
-		//for(int i=0; i<output.size(); i++) {
-		//	System.out.println(output.get(i));
-		//}
+		System.out.println("\nSeparado\n");
+		ArrayList<Player> output = new ArrayList<Player>();
+		output = tsTree.filter(tsTree.getRoot(), 0.0, output, 1, true);
+		for(int i=0; i<output.size(); i++) {
+			System.out.println(output.get(i));
+		}
 		
 		System.out.println("\n"+(System.currentTimeMillis()-time)+"\n");
 		

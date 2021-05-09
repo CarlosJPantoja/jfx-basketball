@@ -22,6 +22,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setMaximized(true);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
 		fxmlLoader.setController(gui);
 		Parent root = fxmlLoader.load();
@@ -31,6 +32,7 @@ public class Main extends Application {
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 		gui.setStage(primaryStage);
 		gui.loader("csvdata.fxml");
+		
 		primaryStage.show();
 	}
 
