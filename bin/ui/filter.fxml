@@ -22,285 +22,99 @@
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
       </Label>
       <Label text="Top 5 best players in each stat">
          <font>
             <Font size="14.0" />
          </font>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
       </Label>
-      <GridPane fx:id="grid" gridLinesVisible="true">
+      <GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="true">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Top">
                <font>
                   <Font size="14.0" />
                </font>
-            </Label>
-            <Label fx:id="stat1" text="Stat #1" GridPane.columnIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="stat2" text="Stat #2" GridPane.columnIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="stat3" text="Stat #3" GridPane.columnIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="stat4" text="Stat #4" GridPane.columnIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="stat5" text="Stat #5" GridPane.columnIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
             <Label text="#1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Button fx:id="stat1Player1" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat2Player1" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #1" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat3Player1" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #1" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat4Player1" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #1" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat5Player1" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #1" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Label text="#2" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Button fx:id="stat1Player2" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat2Player2" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #2" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat3Player2" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat4Player2" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #2" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat5Player2" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #2" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Label text="#3" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Button fx:id="stat1Player3" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #3" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat2Player3" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat3Player3" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #3" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat4Player3" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #3" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat5Player3" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #3" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Label text="#4" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Button fx:id="stat1Player4" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #4" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat2Player4" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #4" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat3Player4" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #4" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat4Player4" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #4" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat5Player4" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #4" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Label text="#5" GridPane.rowIndex="5">
                <font>
                   <Font size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Button fx:id="stat1Player5" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat2Player5" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #5" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat3Player5" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #5" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat4Player5" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #5" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="stat5Player5" mnemonicParsing="false" onAction="#showTopPlayer" style="-fx-background-color: transparent;" text="Player #5" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="5">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="60.0" right="60.0" top="20.0" />
@@ -308,22 +122,31 @@
       </GridPane>
       <HBox alignment="CENTER">
          <children>
-            <ComboBox fx:id="pickStat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" promptText="Stat" style="-fx-background-color: transparent;" visibleRowCount="3">
+            <ComboBox fx:id="pickStat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Stat" style="-fx-background-color: transparent;" visibleRowCount="3">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </ComboBox>
             <ComboBox fx:id="pickSign" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Sign" style="-fx-background-color: transparent;" visibleRowCount="3">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></ComboBox>
-            <TextField fx:id="data" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" promptText="Enter a number">
+               </cursor>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding></ComboBox>
+            <TextField fx:id="data" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter a number">
                <HBox.margin>
                   <Insets left="5.0" right="3.0" />
                </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </TextField>
             <Button mnemonicParsing="false" onAction="#filterTree" style="-fx-background-color: #1c74ec;" text="Filter" textFill="WHITE">
                <font>
@@ -335,6 +158,9 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Button>
          </children>
          <padding>

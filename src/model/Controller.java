@@ -11,7 +11,7 @@ import structures.AVLTree;
 public class Controller {
 	
 	private ArrayList<AVLTree<Double, Player>> stats = new ArrayList<AVLTree<Double, Player>>();
-	private ArrayList<Player> topStat1, topStat2, topStat3, topStat4, topStat5;
+	private ArrayList<Player> topStat1, topStat2, topStat3, topStat4, topStat5, list;
 	
 	private String[] output;
 	private String[] signs = {"<", "<=", "=", ">=", ">"};
@@ -162,6 +162,18 @@ public class Controller {
 
 	public void setValues(int[] values) {
 		this.values = values;
+	}
+
+
+
+	public ArrayList<Player> getList() {
+		return list;
+	}
+
+
+
+	public void setList(ArrayList<Player> list) {
+		this.list = list;
 	}
 }
 

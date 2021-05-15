@@ -9,6 +9,7 @@ public class Player {
 	private Double trb;
 	private Double ast;
 	private Double stl;
+	private Double[] stats;
 	
 	public Player(String name, Integer age, String team, Double ts, Double ftr, Double trb, Double ast, Double stl) {
 		super();
@@ -20,6 +21,8 @@ public class Player {
 		this.trb = trb;
 		this.ast = ast;
 		this.stl = stl;
+		Double[] s = {ts,ftr,trb,ast,stl};
+		stats = s;
 	}
 
 	public String getName() {
@@ -88,5 +91,13 @@ public class Player {
 	
 	public String toString() {
 		return name;
+	}
+
+	public Double[] getStats() {
+		return stats;
+	}
+
+	public void setStats(Double[] stats) {
+		this.stats = stats;
 	}
 }
