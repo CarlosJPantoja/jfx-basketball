@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,35 +22,33 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Controller;
 import model.Player;
-import structures.AVLTree;
 
 public class GUIDriver {
 
 	@FXML
 	private VBox mainVBox;
 	@FXML
-	private Label alertTF, stat1, stat2, stat3, stat4, stat5 , statValue1, statValue2, statValue3, statValue4, statValue5, playersName, playersAge, playersTeam;
+	private HBox pageIndex;
 	@FXML
-	private TextField URL, data;
+	private Label notice, time, warning, name, age, team;
 	@FXML
-	private ComboBox<String> pickStat, pickSign;
+	private TextField URL, data, page;
 	@FXML
-	private GridPane grid;
+	private ComboBox<String> trees, stats, signs;
+	@FXML
+	private GridPane matrix;
 
-	private Controller controller;
+	private Controller driver;
+	private Pagination pages;
 	private Stage stage;
 	private Alert alert;
-	private int pickValue;
-
-	public GUIDriver() {
-		controller = new Controller();
-	}
 
 	public void loader(String fmxl) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fmxl));
@@ -58,10 +56,6 @@ public class GUIDriver {
 		Parent root = fxmlLoader.load();
 		mainVBox.getChildren().clear();
 		mainVBox.getChildren().add(root);
-	}
-
-	public void setStage(Stage primaryStage) {
-		stage = primaryStage;
 	}
 
 	private void launchAlert(String msg) throws IOException {
@@ -72,7 +66,7 @@ public class GUIDriver {
 		fxmlLoader.setController(this);
 		Parent root = fxmlLoader.load();
 		alert.getDialogPane().setHeader(root);
-		alertTF.setText(msg);
+		warning.setText(msg);
 		Stage stage = (Stage)alert.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 		alert.showAndWait();
@@ -98,167 +92,162 @@ public class GUIDriver {
 
 	@FXML
 	public void loadCSVFilter(ActionEvent event) throws IOException {
-		if(URL.getText()==null || URL.getText().equals("")) {
+		if(URL.getText()==null || URL.getText().trim().equals("")) {
 			launchAlert("A file has not been selected yet");
 		} else {
-			String[] stats = controller.loadCSV(URL.getText());
-
+			driver = new Controller();
+			driver.loadCSV(URL.getText());
 			loader("filter.fxml");
-			pickStat.getItems().addAll(stats[0],stats[1],stats[2],stats[3],stats[4]);
-			pickSign.getItems().addAll("<", "<=", "=", ">=", ">");
-
-			for(int i=1; i<=5; i++) {
-				addCenterGrid(new Label(stats[i-1]), grid, i, 0);
-				addCenterGrid(new Label(controller.getTopStat1().get(i-1).getName()), grid, 1, i);
-				addCenterGrid(new Label(controller.getTopStat2().get(i-1).getName()), grid, 2, i);
-				addCenterGrid(new Label(controller.getTopStat3().get(i-1).getName()), grid, 3, i);
-				addCenterGrid(new Label(controller.getTopStat4().get(i-1).getName()), grid, 4, i);
-				addCenterGrid(new Label(controller.getTopStat5().get(i-1).getName()), grid, 5, i);
+			long ms = System.currentTimeMillis();
+			driver.top();
+			time.setText("Filter time: "+(System.currentTimeMillis()-ms)+" milliseconds");
+			pageIndex.setVisible(false);
+			configureComboBox();
+			for(int i=0; i<5; i++) {
+				Label top = new Label("#"+(i+1));
+				Label header = new Label(driver.getHeaders()[i]);
+				placeInMatrix(top, matrix, 0, i+1);
+				placeInMatrix(header, matrix, i+1, 0);
+				for(int j=0; j<5; j++) {
+					Label name = new Label(driver.getTop().get(i).get(j).getName());
+					placeInMatrix(name, matrix, i+1, j+1);
+				}
 			}
-
 		}
 	}
-
-	public ArrayList<Player> filtered() {
-		AVLTree<Double, Player> aux = null;
-		int n = -2;
-		boolean sentinel = false;
-		for(int i=0; i<5 && !sentinel; i++) {
-			if(controller.getOutput()[i].equals(pickStat.getValue())) 
-				aux = controller.getStats().get(i);
-			if(controller.getSigns()[i].equals(pickSign.getValue()))
-				n = controller.getValues()[i];
-		}
-		if(pickSign.getValue().length()>1 && pickSign.getValue().charAt(1)=='=') {
-			sentinel = true;
-		}
-		ArrayList<Player> list = new ArrayList<Player>();
-		list = aux.filter(aux.getRoot(), Double.parseDouble(data.getText()), list, n, sentinel);
-		addCenterGrid(new Label ("Player"), grid, 1, 0);
-		addCenterGrid(new Label (pickStat.getValue()), grid, 2, 0);
-
-		return list;
-
+	
+	private void configureComboBox() {
+		String[] headers = driver.getHeaders();
+		stats.getItems().addAll(headers[0],headers[1],headers[2],headers[3],headers[4]);
+		String[] sign = driver.getSigns();
+		signs.getItems().addAll(sign[0],sign[1],sign[2],sign[3],sign[4]);
+		trees.getItems().addAll("AVL Tree", "ABB Tree");
+		trees.setValue("AVL Tree");
 	}
 
 	@FXML
-	public void filterTree(ActionEvent event) {
-
-		AVLTree<Double, Player> aux = null;
-		int n = -2;
-		boolean sentinel = false;
-		for(int i=0; i<5 && !sentinel; i++) {
-			if(controller.getOutput()[i].equals(pickStat.getValue())) {
-				aux = controller.getStats().get(i);
-				pickValue = i;
+	public void filterTree(ActionEvent event) throws IOException {
+		if(stats.getValue()==null || signs.getValue()==null || data.getText()==null || data.getText().trim().equals("")) {
+			launchAlert("Selet stat, sign and enter a number");
+		} else {
+			try {
+				Double.parseDouble(data.getText());
+			} catch(NumberFormatException e){
+				launchAlert("Enter a number");
+				return;
 			}
-			if(controller.getSigns()[i].equals(pickSign.getValue()))
-				n = controller.getValues()[i];
+			pageIndex.setVisible(true);
+			String[] current = {stats.getValue(), signs.getValue(), data.getText(), "", trees.getValue()};
+			driver.setCurrent(current);
+			Long time = System.currentTimeMillis();
+			if(trees.getValue().equals("AVL Tree"))
+				driver.filter();
+			else
+				driver.filterABB();
+			driver.getCurrent()[3] = (System.currentTimeMillis()-time)+"";
+			configurePagination();
 		}
-		if(pickSign.getValue().length()>1 && pickSign.getValue().charAt(1)=='=') {
-			sentinel = true;
-		}
-		ArrayList<Player> list = new ArrayList<Player>();
-		list = aux.filter(aux.getRoot(), Double.parseDouble(data.getText()), list, n, sentinel);
-		
-
-		controller.setList(list);
-		
-		
-
-		Pagination p = new Pagination();
-		VBox ux = (VBox)mainVBox.getChildren().get(0);
-		ux.getChildren().remove(2);
-		
-		ux.getChildren().add(2, p);
-		p.setMaxPageIndicatorCount((list.size()/16)+1);
-		p.setPageCount((list.size()/16)+1);
-		p.setPageFactory(new Callback<Integer, Node>() {
+	}
+	
+	@FXML
+	public void back(ActionEvent event) throws IOException {
+		configurePagination();
+	}
+	
+	private void configurePagination() throws IOException {
+		loader("filter.fxml");
+		configureComboBox();
+		stats.setValue(driver.getCurrent()[0]);
+		signs.setValue(driver.getCurrent()[1]);
+		data.setText(driver.getCurrent()[2]);
+		notice.setText("Players with "+driver.getCurrent()[0]+" "+driver.getCurrent()[1]+" "+driver.getCurrent()[2]);
+		time.setText("Filter time: "+driver.getCurrent()[3]+" milliseconds");
+		trees.setValue(driver.getCurrent()[4]);
+		pages = new Pagination();
+		VBox current = (VBox)mainVBox.getChildren().get(0);
+		current.getChildren().remove(4);
+		current.getChildren().add(4, pages);
+		pages.setMaxPageIndicatorCount((driver.getList().size()/16)+1);
+		pages.setPageCount((driver.getList().size()/16)+1);
+		pages.setPageFactory(new Callback<Integer, Node>() {
 			public Node call(Integer pageIndex) {
+				matrix = new GridPane();
+				matrix.setGridLinesVisible(false);
+				matrix.setGridLinesVisible(true);
+
+				matrix.setAlignment(Pos.CENTER);
 				
-				grid.getChildren().clear();
-				grid.setGridLinesVisible(false);
-				grid.setGridLinesVisible(true);
-				addCenterGrid(new Label ("Top"), grid, 0, 0);
-				addCenterGrid(new Label ("Player"), grid, 1, 0);
-				addCenterGrid(new Label (pickStat.getValue()), grid, 2, 0);
-				
-				for(int i=((16*(pageIndex+1))-16), j=0; i<(16*(pageIndex+1))&&i<controller.getList().size(); i++, j++) {
-					addCenterGrid(new Label("#"+(i+1)), grid, 0, j+1);
-					Button bt = new Button(controller.getList().get(i).getName());
+				placeInMatrix(new Label("Top"), matrix, 0, 0);
+				placeInMatrix(new Label("Player"), matrix, 1, 0);
+				placeInMatrix(new Label(driver.getCurrent()[0]), matrix, 2, 0);
+				for(int i=((16*(pageIndex+1))-16), j=0; i<(16*(pageIndex+1))&&i<driver.getList().size(); i++, j++) {
+					placeInMatrix(new Label("#"+(i+1)), matrix, 0, j+1);
+					Button bt = new Button(driver.getList().get(i).getName());
 					
 					bt.setStyle("-fx-background-color: transparent;");
 					bt.setPadding(new Insets(5, 10, 5, 10));
-					addCenterGrid(bt, grid, 1, j+1);
-					addCenterGrid(new Label(controller.getList().get(i).getStats()[pickValue]+""), grid, 2, j+1);
-					bt.setOnAction(new EventHandler<ActionEvent>() {
-
-						@Override
-						public void handle(ActionEvent event) {
-							Button bta = (Button)event.getSource();
-							int row = GridPane.getRowIndex(bta)-1;
-							int num = (16*(pageIndex+1))-16+row;
-							Player aux = controller.getList().get(num);
-							try {
-								loader("player.fxml");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							playersName.setText(aux.getName());
-							playersTeam.setText(aux.getTeam());
-							playersAge.setText(aux.getAge()+"");
-							
-						}
-						
-					});
+					placeInMatrix(bt, matrix, 1, j+1);
+					placeInMatrix(new Label(driver.getList().get(i).getStats()[driver.getIndex()]+""), matrix, 2, j+1);
+					
+					configureButtonAction(bt);
+					
 				}
-				GridPane.setMargin(grid, new Insets(0, 0, 73, 0) );
-				return grid;
-				
+				GridPane.setMargin(matrix, new Insets(0, 0, 73, 0) );
+				page.setText((pages.getCurrentPageIndex()+1)+"");
+				return matrix;
 			}
 		});
+		pages.setPrefSize(matrix.getWidth(), 603);
+		VBox.setMargin(pages, new Insets(20, 60, 20, 60));
 		
-		
-		p.setPrefSize(grid.getWidth(), 603);
-		//p.setMaxSize(grid.getWidth(), 529);
-		//p.setMinSize(grid.getWidth(), 529);
-		VBox.setMargin(p, new Insets(20, 60, 20, 60));
-
-		//GridThread gt = new GridThread(controller, this);
-		//gt.setDaemon(true);
-		//gt.start();
-
-
-		//GridPane gr = new GridPane();
-		//gr.setGridLinesVisible(true);
-
-
-
-
-
-
-		//VBox.setMargin(sp, new Insets(20, 60, 20, 60));
-
-		//gr.setAlignment(Pos.CENTER);
-
-		//sp.setPrefSize(600, 529);
-
-		//stage.sizeToScene();
-
+	}
+	
+	private void configureButtonAction(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Button current = (Button)event.getSource();
+				int row = GridPane.getRowIndex(current)-1;
+				int num = (16*(pages.getCurrentPageIndex()+1))-16+row;
+				Player player = driver.getList().get(num);
+				try {
+					loader("player.fxml");
+				} catch (IOException e) {
+				}
+				name.setText(player.getName());
+				team.setText(player.getTeam());
+				age.setText(player.getAge()+"");
+				for(int i=0; i<5; i++) {
+					placeInMatrix(new Label(driver.getHeaders()[i]), matrix, 0, i);
+					placeInMatrix(new Label(player.getStats()[i]+""), matrix, 1, i);
+				}
+			}
+		});
 	}
 
-	private <Type extends Labeled> void addCenterGrid(Type element, GridPane matrix, int column, int row) {
+	private <Type extends Labeled> void placeInMatrix(Type element, GridPane matrix, int column, int row) {
 		matrix.add(element, column, row);
 		GridPane.setHalignment(element, HPos.CENTER);
 		GridPane.setValignment(element, VPos.CENTER);
 		element.setPadding(new Insets(5, 10, 5, 10));
 	}
-
 	
+	@FXML
+    public void locatePage(ActionEvent event) throws IOException {
+		try {
+			Integer index = Integer.parseInt(page.getText());
+			if(index>pages.getPageCount())
+				index = pages.getPageCount();
+			else if(index<1)
+				index = 1;
+			pages.setCurrentPageIndex(index-1);
+			page.setText(index+"");
+		} catch(NumberFormatException e){
+			launchAlert("Enter a number in Index");
+		}
+    }
+	
+	public void setStage(Stage s) {
+		stage = s;
+	}
 }
-
-/*
-	//"-fx-background-color: transparent;"
-	C:\Users\Carlos\OneDrive\Documentos\Eclipse IDE\Workspaces\eclipse-workspace\jfx-basketball\data\data.csv
-*/

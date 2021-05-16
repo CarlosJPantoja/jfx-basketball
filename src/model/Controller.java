@@ -5,176 +5,133 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import structures.ABBTree;
 import structures.AVLNode;
 import structures.AVLTree;
 
 public class Controller {
-	
-	private ArrayList<AVLTree<Double, Player>> stats = new ArrayList<AVLTree<Double, Player>>();
-	private ArrayList<Player> topStat1, topStat2, topStat3, topStat4, topStat5, list;
-	
-	private String[] output;
+
+	private ArrayList<ABBTree<Double, Player>> statsABB;
+	private ArrayList<AVLTree<Double, Player>> stats;
+	private ArrayList<ArrayList<Player>> top;
+	private ArrayList<Player> list;
+
+	private String[] headers, current;
 	private String[] signs = {"<", "<=", "=", ">=", ">"};
 	private int[] values = {-1, -1, 0, 1, 1};
-	
-	public ArrayList<Player> getTopStat1() {
-		return topStat1;
-	}
-	
-	
+	private int index;
 
-	public ArrayList<AVLTree<Double, Player>> getStats() {
-		return stats;
-	}
-
-
-
-	public void setStats(ArrayList<AVLTree<Double, Player>> stats) {
-		this.stats = stats;
-	}
-
-
-
-	public void setTopStat1(ArrayList<Player> topStat1) {
-		this.topStat1 = topStat1;
-	}
-	
-	
-
-	public ArrayList<Player> getTopStat2() {
-		return topStat2;
-	}
-
-	public void setTopStat2(ArrayList<Player> topStat2) {
-		this.topStat2 = topStat2;
-	}
-
-	public ArrayList<Player> getTopStat3() {
-		return topStat3;
-	}
-
-	public void setTopStat3(ArrayList<Player> topStat3) {
-		this.topStat3 = topStat3;
-	}
-
-	public ArrayList<Player> getTopStat4() {
-		return topStat4;
-	}
-
-	public void setTopStat4(ArrayList<Player> topStat4) {
-		this.topStat4 = topStat4;
-	}
-
-	public ArrayList<Player> getTopStat5() {
-		return topStat5;
-	}
-
-	public void setTopStat5(ArrayList<Player> topStat5) {
-		this.topStat5 = topStat5;
-	}
-	
 	public Controller() {
-		topStat1 = new ArrayList<>();
-		topStat2 = new ArrayList<>();
-		topStat3 = new ArrayList<>();
-		topStat4 = new ArrayList<>();
-		topStat5 = new ArrayList<>();
-	}
-	
-	public String[] loadCSV(String URL) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(URL));
-		stats.add(new AVLTree<>());
-		stats.add(new AVLTree<>());
-		stats.add(new AVLTree<>());
-		stats.add(new AVLTree<>());
-		stats.add(new AVLTree<>());
-		String[] out = br.readLine().split(";");
-		String[] output = {out[3],out[4],out[5],out[6],out[7]};
-		this.output = output;
-		try {
-			while(true) {
-				String[] line = br.readLine().split(";");
-				String name = line[0];
-				Integer age = Integer.parseInt(line[1]);
-				String team = line[2];
-				Double ts = Double.parseDouble(line[3]);
-				Double ftr = Double.parseDouble(line[4]);
-				Double trb = Double.parseDouble(line[5]);
-				Double ast = Double.parseDouble(line[6]);
-				Double stl = Double.parseDouble(line[7]);
-				Player aux = new Player(name, age, team, ts, ftr, trb, ast, stl);
-				stats.get(0).insertar(ts, aux);
-				stats.get(1).insertar(ftr, aux);
-				stats.get(2).insertar(trb, aux);
-				stats.get(3).insertar(ast, aux);
-				stats.get(4).insertar(stl, aux);
-			}
-		} catch(Exception e) {
-			
+		statsABB = new ArrayList<>();
+		stats = new ArrayList<>();
+		top = new ArrayList<>();
+		list = new ArrayList<>();
+		headers = new String[5];
+		for(int i=0; i<5; i++) {
+			statsABB.add(new ABBTree<>());
+			stats.add(new AVLTree<>());
+			top.add(new ArrayList<>());
 		}
-		
-		topFive(stats.get(0).getRoot(), topStat1);
-		topFive(stats.get(1).getRoot(), topStat2);
-		topFive(stats.get(2).getRoot(), topStat3);
-		topFive(stats.get(3).getRoot(), topStat4);
-		topFive(stats.get(4).getRoot(), topStat5);
-		
-		br.close();
-		return output;
-	}
-	
-	
-	
-	public String[] getOutput() {
-		return output;
 	}
 
-	public void setOutput(String[] output) {
-		this.output = output;
+	public void loadCSV(String URL) throws IOException {
+		BufferedReader lector = new BufferedReader(new FileReader(URL));
+		String[] data = lector.readLine().split(";");
+		for(int i=0; i<5; i++)
+			headers[i] = data[i+3];
+		String line = lector.readLine();
+		while(line!=null) {
+			data = line.split(";");
+			Integer age = Integer.parseInt(data[1]);
+			Double[] stat = new Double[5];
+			for(int i=0; i<5; i++)
+				stat[i] = Double.parseDouble(data[i+3]);
+			Player player = new Player(data[0], age, data[2], stat);
+			for(int i=0; i<5; i++) {
+				statsABB.get(i).insert(stat[i], player);
+				stats.get(i).insert(stat[i], player);
+			}
+			line = lector.readLine();
+		}
+		lector.close();
 	}
-
-	public void topFive(AVLNode<Double, Player> r, ArrayList<Player> top){
-		if(r!=null){
-			topFive(r.getRight(), top);
-			for(int i=0; i<r.getPlayers().size(); i++) {
-				
-				if(top.size()>=5) {
+	
+	public void top() {
+		for(int i=0; i<5; i++)
+			top(stats.get(i).getRoot(), top.get(i));
+	}
+	
+	private void top(AVLNode<Double, Player> root, ArrayList<Player> top){
+		if(root!=null){
+			top(root.getRight(), top);
+			for(int i=0; i<root.getPlayers().size(); i++) {
+				if(top.size()>=5)
 					return;
-				}
-				top.add(r.getPlayers().get(i));
+				top.add(root.getPlayers().get(i));
 			}
-			topFive(r.getLeft(), top);
+			top(root.getLeft(), top);
 		}
-		
 	}
 
-	public String[] getSigns() {
-		return signs;
+	public void filter() {
+		list = new ArrayList<>();
+		AVLTree<Double, Player> tree = null;
+		int n = -2;
+		for(int i=0; i<5; i++) {
+			if(headers[i].equals(current[0])) {	
+				tree = stats.get(i);
+				index = i;
+			}
+			if(signs[i].equals(current[1]))
+				n = values[i];
+		}
+		Double data = Double.parseDouble(current[2]);
+		list = tree.filter(tree.getRoot(), data, list, n, current[1].length()>1);
+	}
+	
+	public void filterABB() {
+		list = new ArrayList<>();
+		ABBTree<Double, Player> tree = null;
+		int n = -2;
+		for(int i=0; i<5; i++) {
+			if(headers[i].equals(current[0])) {	
+				tree = statsABB.get(i);
+				index = i;
+			}
+			if(signs[i].equals(current[1]))
+				n = values[i];
+		}
+		Double data = Double.parseDouble(current[2]);
+		list = tree.filter(tree.getRoot(), data, list, n, current[1].length()>1);
 	}
 
-	public void setSigns(String[] signs) {
-		this.signs = signs;
+	//Getters
+	public ArrayList<ArrayList<Player>> getTop() {
+		return top;
 	}
-
-	public int[] getValues() {
-		return values;
-	}
-
-	public void setValues(int[] values) {
-		this.values = values;
-	}
-
-
-
+	
 	public ArrayList<Player> getList() {
 		return list;
 	}
 
+	public String[] getHeaders() {
+		return headers;
+	}
+	
+	public String[] getCurrent() {
+		return current;
+	}
+	
+	public String[] getSigns() {
+		return signs;
+	}
 
+	public int getIndex() {
+		return index;
+	}
 
-	public void setList(ArrayList<Player> list) {
-		this.list = list;
+	//Setters
+	public void setCurrent(String[] c) {
+		current = c;
 	}
 }
-
-//C:\Users\Carlos\OneDrive\Documentos\Eclipse IDE\Workspaces\eclipse-workspace\jfx-basketball\data\data.csv

@@ -40,6 +40,23 @@ public class AVLNode<T, U> implements Comparable<T>{
     	}
     }
 
+	@Override
+	public int compareTo(T o) {
+		Double x = Double.parseDouble(o+"");
+		Double y = Double.parseDouble(statistic+"");
+		if(y>x) {
+			return 1;
+		} else if(x>y) {
+			return -1;
+		} else {
+			return 0;
+		}
+	}
+    
+	public void addPlayer(U p) {
+		players.add(p);
+	}
+
 	public AVLNode<T, U> getLeft() {
 		return left;
 	}
@@ -56,6 +73,14 @@ public class AVLNode<T, U> implements Comparable<T>{
 		right = r;
 	}
 
+	public AVLNode<T, U> getFather() {
+		return father;
+	}
+
+	public void setFather(AVLNode<T, U> father) {
+		this.father = father;
+	}
+
 	public int getBf() {
 		return balance;
 	}
@@ -68,29 +93,8 @@ public class AVLNode<T, U> implements Comparable<T>{
 		return players;
 	}
 
-	public void setPlayers(ArrayList<U> p) {
-		players = p;
-	}
-	
-	public void addPlayer(U p) {
-		players.add(p);
-	}
-
 	public T getStatistic() {
 		return statistic;
-	}
-
-	@Override
-	public int compareTo(T o) {
-		Double x = Double.parseDouble(o+"");
-		Double y = Double.parseDouble(statistic+"");
-		if(y>x) {
-			return 1;
-		} else if(x>y) {
-			return -1;
-		} else {
-			return 0;
-		}
 	}
 
 	public int getH() {
@@ -99,13 +103,5 @@ public class AVLNode<T, U> implements Comparable<T>{
 
 	public void setH(int h) {
 		this.h = h;
-	}
-
-	public AVLNode<T, U> getFather() {
-		return father;
-	}
-
-	public void setFather(AVLNode<T, U> father) {
-		this.father = father;
 	}
 }

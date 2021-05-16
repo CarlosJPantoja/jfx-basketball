@@ -32,7 +32,6 @@ public class Main extends Application {
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 		gui.setStage(primaryStage);
 		gui.loader("csvdata.fxml");
-		
 		primaryStage.show();
 	}
 

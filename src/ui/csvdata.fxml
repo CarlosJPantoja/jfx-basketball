@@ -79,28 +79,13 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1c74ec;" text="Enter data" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#loadCSVFilter" style="-fx-background-color: #1c74ec;" text="Next" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="3.0" />
-               </HBox.margin>
-            </Button>
-         </children>
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#loadCSVFilter" style="-fx-background-color: #1c74ec;" text="Next" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
          <VBox.margin>
-            <Insets bottom="30.0" top="20.0" />
+            <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
-      </HBox>
+      </Button>
    </children>
 </VBox>

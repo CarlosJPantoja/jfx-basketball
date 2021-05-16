@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="alertTF" text="Alert message">
+      <Label fx:id="warning" text="Alert message">
          <VBox.margin>
             <Insets left="60.0" right="60.0" top="20.0" />
          </VBox.margin>
